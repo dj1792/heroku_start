@@ -2,7 +2,7 @@ require 'sinatra'
 require "active_support/all"
 require 'sinatra/activerecord'
 require 'json'
-
+require 'rake'
 #before do
 #	content_type :json
 #end
@@ -26,7 +26,7 @@ production:
   database: ENV['DATABASE_URL']
   pool: 5
   timeout: 5000
- 
+
 get'/' do
 	error 401
 end
