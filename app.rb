@@ -7,7 +7,7 @@ require 'json'
 #	content_type :json
 #end
 
-enable :sessions
+#enable :sessions
 
 get'/' do
 	error 401
