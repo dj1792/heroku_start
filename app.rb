@@ -8,7 +8,6 @@ require 'rake'
 #end
 
 #enable :sessions
-
 development:
   adapter: sqlite3
   database: db/development.sqlite3
