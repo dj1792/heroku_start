@@ -21,7 +21,7 @@ message = @client.account.messages.create(:body => "Hello from Ruby",
     :from => "+14122183432")  # Replace with your Twilio number
 
 puts message.sid
-
+end
 get'/' do
 	error 401
 end
