@@ -5,6 +5,7 @@ gem 'activesupport'
 gem "rake"
 gem 'activerecord'
 gem 'sinatra-activerecord' 
+gem 'twilio-ruby'
 # gem 'sqlite3'
 group :development, :test do
   gem 'sqlite3'
