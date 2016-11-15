@@ -65,6 +65,7 @@ Temporary Items
 
 /tmp
 
+.env
 
 # Ignore ruby-version
 
