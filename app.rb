@@ -3,9 +3,12 @@ require "active_support/all"
 require 'sinatra/activerecord'
 require 'json'
 require 'rake'
+
 #before do
 #	content_type :json
 #end
+
+require 'twilio-ruby'
 
 enable :sessions
 
@@ -14,10 +17,8 @@ configure :development do
   Dotenv.load
 end
 
-require 'twilio-ruby'
 
-
-client = Twilio::REST::Client.new ENV["Twilio_sid"], ENV["Twilio_token"}
+client = Twilio::REST::Client.new ENV["Twilio_sid"], ENV["Twilio_token"]
 
 get "/send_sms" do
 
@@ -31,8 +32,6 @@ get "/send_sms" do
   
 end
 
-
-end
 get'/' do
 	error 401
 end
