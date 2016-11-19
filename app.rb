@@ -1,6 +1,6 @@
 require 'sinatra'
 require "active_support/all"
-require 'sinatra/activerecord'
+#require 'sinatra/activerecord'
 require 'json'
 require 'rake'
 
@@ -16,7 +16,6 @@ configure :development do
   require 'dotenv'
   Dotenv.load
 end
-
 
 client = Twilio::REST::Client.new ENV["Twilio_sid"], ENV["Twilio_token"]
 
