@@ -14,3 +14,4 @@ gem 'builder'
 gem 'twilio-ruby'
 
 gem 'dotenv'
+gem 'pg'
