@@ -1,17 +1,16 @@
 source 'https://rubygems.org'
-gem 'sinatra', require: 'sinatra/base'
-gem 'json'
+
+gem 'sinatra'
 gem 'activesupport'
+
 gem "rake"
 gem 'activerecord'
-gem 'sinatra-activerecord' 
-gem 'twilio-ruby'
-# gem 'sqlite3'
-group :development, :test do
-  gem 'sqlite3'
-end
+gem 'sinatra-activerecord' # excellent gem that ports ActiveRecord for Sinatra
 
-group :production do
-  gem 'pg'
-end
-gem 'pg'
+gem 'json'
+gem 'haml'
+gem 'builder'
+
+gem 'twilio-ruby'
+
+gem 'dotenv'
