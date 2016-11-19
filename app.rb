@@ -6,7 +6,9 @@ require 'rake'
 #before do
 #	content_type :json
 #end
-#enable :sessions
+
+enable :sessions
+
 configure :development do
   require 'dotenv'
   Dotenv.load
@@ -14,13 +16,22 @@ end
 
 require 'twilio-ruby'
 
-development:
-@client = Twilio::REST::Client.new Twilio_sid, Twilio_token
-message = @client.account.messages.create(:body => "Hello from Ruby",
-    :to => "+14122947286",    # Replace with your phone number
-    :from => "+14122183432")  # Replace with your Twilio number
 
-puts message.sid
+client = Twilio::REST::Client.new ENV["Twilio_sid"], ENV["Twilio_token"}
+
+get "/send_sms" do
+
+  client.account.messages.create(
+    :from => "+14122183432",
+    :to => "+14122947286",
+    :body => "Hey there. This is a test"
+  )
+
+  "Sent message"
+  
+end
+
+
 end
 get'/' do
 	error 401
