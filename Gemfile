@@ -15,3 +15,4 @@ gem 'twilio-ruby'
 
 gem 'dotenv'
 gem 'pg'
+gem 'instagram'

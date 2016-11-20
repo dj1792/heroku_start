@@ -9,6 +9,7 @@ require 'rake'
 #end
 
 require 'twilio-ruby'
+require 'instagram'
 
 enable :sessions
 
@@ -55,6 +56,38 @@ get '/incoming_sms' do
   twiml.text
 
 end
+
+#Get a list of the overall most popular media items from Instagram
+get '/insta' do
+   
+  Instagram.configure do |config|
+  config.client_id = ENV["insta_id"]
+  config.client_secret = ENV["insta_secret"]
+  end
+
+  client = Instagram.client(:access_token => session[:access_token])
+ 
+  results = client.media_popular(limit:3)
+  pic = nil
+  first. media_item.images.thumbnail.url
+
+  unless results.empty? 
+    
+    pic = results.first.media_item.images.thumbnail.url
+    message = "Most ppopular image on Instagram"
+  
+  twiml = Twilio::TwiML::Response.new do |r|
+    r.Message do |m|
+        m.Body message
+        unless pic.nil?
+            m.Media pic
+        end
+    end
+  end
+  twiml.text
+
+end
+
 get'/' do
 	error 401
 end
