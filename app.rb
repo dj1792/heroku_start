@@ -41,10 +41,12 @@ get '/incoming_sms' do
   body = params[:Body] || ""
   body = body.downcase.strip
 
-  if use_table(body).nil?
-  	message = "Not valid, try who, why, what or where"  
+  link = Link.where(placeholder: body)
+  
+  if link	
+  	message = link.msg  
   else
- 	 message = use_table (body)
+ 	message = "Not valid, try who, why, what or where"   
   end
   
   session["counter"] += 1
@@ -95,10 +97,4 @@ end
 
 error 401 do
 	{ error: "Not allowed"}.to_json
-end
-
-#using function to return matching message to input from user
-def use_table a
-	l = Link.where(placeholder: a)
-	return l.msg
 end
