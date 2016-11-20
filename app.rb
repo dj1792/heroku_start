@@ -59,7 +59,7 @@ end
 
 #returns the overall most popular media items from Instagram
 #http://www.rubydoc.info/gems/instagram/1.1.6--> reference
-get "/instagram"
+get "/instagram" do
   Instagram.configure do |config|
   config.client_id = ENV["insta_id"]
   config.client_secret = ENV["insta_secret"]
@@ -85,7 +85,6 @@ get "/instagram"
     end
   end
   twiml.text
-
 end
 
 get'/' do
