@@ -41,10 +41,10 @@ get '/incoming_sms' do
   body = params[:Body] || ""
   body = body.downcase.strip
 
-  if session["counter"] < 1
-    message = "Thanks for your first message. From #{sender} saying #{body}"
+  if use_table(body).nil?
+  	message = "Not valid, try who, why, what or where"  
   else
-    message = "Thanks for message number #{ count }. From #{sender} saying #{body}"
+ 	 message = use_table (body)
   end
   
   session["counter"] += 1
@@ -67,9 +67,9 @@ get "/instagram" do
   config.client_secret = ENV["insta_secret"]
   end
   
-  redirect Instagram.authorize_url(:redirect_uri => CALLBACK_URL)
+  Instagram.authorize_url
 
-  response = Instagram.get_access_token(params[:code], :redirect_uri => CALLBACK_URL)
+  response = Instagram.get_access_token(params[:code],)
   session[:access_token] = response.access_token
 
   client = Instagram.client(:access_token => session[:access_token])
@@ -95,4 +95,10 @@ end
 
 error 401 do
 	{ error: "Not allowed"}.to_json
+end
+
+#using function to return matching message to input from user
+def use_table a
+	l = Link.where(placeholder: a)
+	return l.msg
 end
