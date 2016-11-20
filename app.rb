@@ -58,7 +58,7 @@ get '/incoming_sms' do
   content_type 'text/xml'
 
   twiml.text
-
+  
 end
 
 #returns the overall most popular media items from Instagram
