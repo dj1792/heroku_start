@@ -11,6 +11,8 @@ require 'rake'
 require 'twilio-ruby'
 require 'instagram'
 
+require_relative './models/link'
+
 enable :sessions
 
 configure :development do
