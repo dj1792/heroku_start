@@ -64,9 +64,9 @@ get '/insta' do
   config.client_id = ENV["insta_id"]
   config.client_secret = ENV["insta_secret"]
   end
-  
+
   Instagram.authorize_url
-  response = Instagram.get_access_token(params[:code])
+  response = Instagram.get_access_token(params[:code],nil)
   session[:access_token] = response.access_token
 
   client = Instagram.client(:access_token => session[:access_token])
