@@ -69,23 +69,16 @@ get '/insta' do
  
   results = client.media_popular(limit:3)
   pic = nil
-  first. media_item.images.thumbnail.url
-
-  unless results.empty? 
-    
+      
     pic = results.first.media_item.images.thumbnail.url
-    message = "Most ppopular image on Instagram"
-  
-  twiml = Twilio::TwiML::Response.new do |r|
-    r.Message do |m|
-        m.Body message
-        unless pic.nil?
-            m.Media pic
-        end
-    end
-  end
-  twiml.text
-
+    
+  client.account.messages.create(
+    :from => "+14122183432",
+    :to => "+14122947286",
+    :body => "Most popular image on Instagram",
+    :media => pic
+  )
+   "Sent message"
 end
 
 get'/' do
