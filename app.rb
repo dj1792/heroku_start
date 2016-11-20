@@ -59,14 +59,14 @@ end
 
 #returns the overall most popular media items from Instagram
 get '/insta' do
-
+  CALLBACK_URL = nil
   Instagram.configure do |config|
   config.client_id = ENV["insta_id"]
   config.client_secret = ENV["insta_secret"]
   end
 
   Instagram.authorize_url
-  response = Instagram.get_access_token(params[:code],nil)
+  response = Instagram.get_access_token(params[:code], :redirect_uri => CALLBACK_URL)
   session[:access_token] = response.access_token
 
   client = Instagram.client(:access_token => session[:access_token])
