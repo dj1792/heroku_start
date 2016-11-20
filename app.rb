@@ -57,7 +57,7 @@ get '/incoming_sms' do
 
 end
 
-#Get a list of the overall most popular media items from Instagram
+#returns the overall most popular media items from Instagram
 get '/insta' do
    
   Instagram.configure do |config|
@@ -68,17 +68,19 @@ get '/insta' do
   client = Instagram.client(:access_token => session[:access_token])
  
   results = client.media_popular(limit:3)
-  pic = nil
-      
-    pic = results.first.media_item.images.thumbnail.url
+  message = "Most popular image on Instagram"
+  pic = results.first.media_item.images.thumbnail.url
     
-  client.account.messages.create(
-    :from => "+14122183432",
-    :to => "+14122947286",
-    :body => "Most popular image on Instagram",
-    :media => pic
-  )
-   "Sent message"
+  twiml = Twilio::TwiML::Response.new do |r|
+    r.Message do |m|
+        m.Body message
+        unless pic.nil?
+            m.Media pic
+        end
+    end
+  end
+  twiml.text
+ 
 end
 
 get'/' do
