@@ -64,6 +64,9 @@ get '/insta' do
   config.client_id = ENV["insta_id"]
   config.client_secret = ENV["insta_secret"]
   end
+  
+  response = Instagram.get_access_token(params[:code], :redirect_uri => CALLBACK_URL)
+  session[:access_token] = response.access_token
 
   client = Instagram.client(:access_token => session[:access_token])
  
@@ -80,7 +83,7 @@ get '/insta' do
     end
   end
   twiml.text
- 
+
 end
 
 get'/' do
