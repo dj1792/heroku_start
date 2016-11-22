@@ -41,7 +41,7 @@ get '/incoming_sms' do
   body = params[:Body] || ""
   body = body.downcase.strip
 
-  link = Link.where(placeholder: body)
+  link = Reply.where(placeholder: body)
   
   if link	
   	message = link.msg  
@@ -58,7 +58,7 @@ get '/incoming_sms' do
   content_type 'text/xml'
 
   twiml.text
-
+  
 end
 
 #returns the overall most popular media items from Instagram
